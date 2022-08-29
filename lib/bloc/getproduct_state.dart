@@ -1,4 +1,4 @@
-import 'package:ecommerceapp/models/get_all_products_model.dart';
+import 'package:ecommerceapp/models/new_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class GetProductState extends Equatable {
@@ -12,7 +12,7 @@ class Productinitial extends GetProductState {}
 class ProductLoading extends GetProductState {}
 
 class ProductLoaded extends GetProductState {
-  final AllProducts allproducts;
+  final List<Product> allproducts;
 
   const ProductLoaded(this.allproducts);
 }

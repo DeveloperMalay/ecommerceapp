@@ -30,8 +30,11 @@ class HomeView extends StatelessWidget {
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        height: MediaQuery.of(context).size.height * 10,
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
+          verticalDirection: VerticalDirection.down,
+          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Search(),
