@@ -1,7 +1,8 @@
-import 'package:ecommerceapp/theme/theme.dart';
-import 'package:ecommerceapp/views/widgets/product_category.dart';
-import 'package:ecommerceapp/views/widgets/search.dart';
-import 'package:ecommerceapp/views/widgets/slider.dart';
+import 'package:ecommerceapp/UI/theme/theme.dart';
+import 'package:ecommerceapp/UI/widgets/get_all_product.dart';
+import 'package:ecommerceapp/UI/widgets/product_category.dart';
+import 'package:ecommerceapp/UI/widgets/search.dart';
+import 'package:ecommerceapp/UI/widgets/slider.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -37,7 +38,7 @@ class HomeView extends StatelessWidget {
             const ImageSlider(),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
-              child:Text(
+              child: Text(
                 'Category',
                 style: TextStyle(
                   fontSize: 20,
@@ -51,7 +52,7 @@ class HomeView extends StatelessWidget {
             ProductCategory(),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
-              child:Text(
+              child: Text(
                 'All Products',
                 style: TextStyle(
                   fontSize: 20,
@@ -59,6 +60,7 @@ class HomeView extends StatelessWidget {
                 ),
               ),
             ),
+            const GetAllProducts(),
           ],
         ),
       ),
