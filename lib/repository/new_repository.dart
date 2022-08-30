@@ -6,6 +6,14 @@ class NewApiRepository {
   Future<List<Product>?> fetchAllProducts() {
     return _provider.getProducts();
   }
+
+  Future<List<Product>?> fetchProductsByCategory() {
+    return _provider.getProductByCategoty('categoryName');
+  }
+
+  Future<Product> fetchProductsByID() {
+    return _provider.getProductById(1);
+  }
 }
 
 class NetworkError extends Error {}

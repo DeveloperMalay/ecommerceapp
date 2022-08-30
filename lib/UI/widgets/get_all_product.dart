@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/UI/views/product_details_view.dart';
 import 'package:ecommerceapp/bloc/getproduct_bloc.dart';
 import 'package:ecommerceapp/bloc/getproduct_event.dart';
 import 'package:ecommerceapp/bloc/getproduct_state.dart';
@@ -69,7 +70,13 @@ Widget _buildCard(BuildContext context, List<Product> model) {
       itemCount: model.length,
       itemBuilder: (context, index) {
         return InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ProductDetailView(
+                productID: model[index].id,
+              );
+            }));
+          },
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -79,7 +86,6 @@ Widget _buildCard(BuildContext context, List<Product> model) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(

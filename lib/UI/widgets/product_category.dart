@@ -4,12 +4,30 @@ class ProductCategory extends StatelessWidget {
   ProductCategory({Key? key}) : super(key: key);
 
   final List<Map<String, String>> category = [
-    {'imageUrl': 'assets/electronics.jpg', 'title': 'electronics'},
-    {'imageUrl': 'assets/jewelary.jpg', 'title': 'jewelary'},
-    {'imageUrl': 'assets/men.jpg', 'title': "men's clothing"},
-    {'imageUrl': 'assets/women.jpg', 'title': "women's clothing"},
-    {'imageUrl': 'assets/electronics.jpg', 'title': 'electronics'},
-    {'imageUrl': 'assets/jewelary.jpg', 'title': 'jewelary'},
+    {
+      'imageUrl': 'assets/electronics.jpg',
+      'title': 'electronics',
+    },
+    {
+      'imageUrl': 'assets/jewelary.jpg',
+      'title': 'jewelary',
+    },
+    {
+      'imageUrl': 'assets/men.jpg',
+      'title': "men's clothing",
+    },
+    {
+      'imageUrl': 'assets/women.jpg',
+      'title': "women's clothing",
+    },
+    {
+      'imageUrl': 'assets/electronics.jpg',
+      'title': 'electronics',
+    },
+    {
+      'imageUrl': 'assets/jewelary.jpg',
+      'title': 'jewelary',
+    },
   ];
   @override
   Widget build(BuildContext context) {

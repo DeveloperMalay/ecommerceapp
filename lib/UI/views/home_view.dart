@@ -75,6 +75,23 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: Container(
+        height: 70,
+        width: 70,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: theme.primaryColorDark,
+        ),
+        child: IconButton(
+          splashColor: theme.primaryColor,
+          icon: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 35,
+          ),
+          onPressed: () {},
+        ),
+      ),
     );
   }
 }
