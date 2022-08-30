@@ -8,7 +8,7 @@ class Search extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       child: SizedBox(
-        height: 60,
+        height: 50,
         width: 400,
         child: TextField(
           decoration: InputDecoration(

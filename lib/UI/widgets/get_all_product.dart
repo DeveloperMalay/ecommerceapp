@@ -1,4 +1,3 @@
-import 'package:ecommerceapp/UI/theme/theme.dart';
 import 'package:ecommerceapp/bloc/getproduct_bloc.dart';
 import 'package:ecommerceapp/bloc/getproduct_event.dart';
 import 'package:ecommerceapp/bloc/getproduct_state.dart';
@@ -61,20 +60,26 @@ class _GetAllProductsState extends State<GetAllProducts> {
 
 Widget _buildCard(BuildContext context, List<Product> model) {
   return Expanded(
-    child: SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: GridView.builder(
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisSpacing: 20, mainAxisSpacing: 20, crossAxisCount: 2),
-        itemCount: model.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {},
+    child: GridView.builder(
+      // scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
+      shrinkWrap: true,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 20, mainAxisSpacing: 20, crossAxisCount: 2),
+      itemCount: model.length,
+      itemBuilder: (context, index) {
+        return InkWell(
+          onTap: () {},
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
@@ -107,9 +112,9 @@ Widget _buildCard(BuildContext context, List<Product> model) {
                 ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     ),
   );
 }
