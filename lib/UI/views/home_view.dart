@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ecommerce'),
-        backgroundColor: theme.primaryColorDark,
+       
         actions: [
           const Icon(
             Icons.favorite_rounded,

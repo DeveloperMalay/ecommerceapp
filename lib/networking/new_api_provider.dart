@@ -13,10 +13,11 @@ class ApiProvider {
   }
 
 //getting the product by category
-  Future<List<Product>?> getProductByCategoty(String categoryName) async {
+  Future<List<Product>> getProductByCategoty(String categoryName) async {
     var uri =
-        Uri.parse('https://fakestoreapi.com/products/categoty/$categoryName');
+        Uri.parse('https://fakestoreapi.com/products/category/$categoryName');
     var response = await http.get(uri);
+
     var json = response.body;
     return productsFromJson(json);
   }

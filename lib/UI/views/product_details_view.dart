@@ -19,9 +19,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -37,12 +35,12 @@ class _ProductDetailViewState extends State<ProductDetailView> {
           icon: const Icon(
             Icons.arrow_back,
             size: 30,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         title: const Text(
           'Product Details',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
       ),
@@ -125,7 +123,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
             'Information',
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
           ),
-          Text(product.description),
+          SizedBox(height: 95, child: Text(product.description)),
           const SizedBox(
             height: 15,
           ),
