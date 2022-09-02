@@ -1,21 +1,22 @@
+import 'package:ecommerceapp/UI/views/authview/sign_in_view.dart';
 import 'package:ecommerceapp/UI/widgets/error_snackbar.dart';
-import 'package:ecommerceapp/UI/widgets/sign_in_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SignUpWidget extends StatefulWidget {
-  const SignUpWidget({Key? key}) : super(key: key);
+class SignUpView extends StatefulWidget {
+  const SignUpView({Key? key}) : super(key: key);
 
   @override
-  State<SignUpWidget> createState() => _SignUpWidgetState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _SignUpWidgetState extends State<SignUpWidget> {
+class _SignUpViewState extends State<SignUpView> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   ErrorSnackBar snackBar = ErrorSnackBar();
+
   @override
   void dispose() {
     emailController.dispose();
@@ -41,7 +42,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     } on FirebaseAuthException catch (e) {
       snackBar.showSnackBar(e.message);
     }
-    
   }
 
   @override
@@ -112,9 +112,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const SignInWidget();
-                  }));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const SignInView();
+                      },
+                    ),
+                  );
                 },
                 child: Row(
                   children: const [

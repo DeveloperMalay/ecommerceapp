@@ -1,5 +1,5 @@
 import 'package:ecommerceapp/UI/views/home_view.dart';
-import 'package:ecommerceapp/UI/widgets/sign_in_widget.dart';
+import 'package:ecommerceapp/UI/views/authview/sign_in_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
           if (snapshot.hasData) {
             return const HomeView();
           } else {
-            return const SignInWidget();
+            return const SignInView();
           }
         },
       ),

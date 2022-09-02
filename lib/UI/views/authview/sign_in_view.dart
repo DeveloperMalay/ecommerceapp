@@ -1,17 +1,17 @@
+import 'package:ecommerceapp/UI/views/authview/sign_up_view.dart';
 import 'package:ecommerceapp/UI/widgets/error_snackbar.dart';
-import 'package:ecommerceapp/UI/widgets/sign_up_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SignInWidget extends StatefulWidget {
-  const SignInWidget({Key? key}) : super(key: key);
+class SignInView extends StatefulWidget {
+  const SignInView({Key? key}) : super(key: key);
 
   @override
-  State<SignInWidget> createState() => _SignInWidgetState();
+  State<SignInView> createState() => _SignInViewState();
 }
 
-class _SignInWidgetState extends State<SignInWidget> {
+class _SignInViewState extends State<SignInView> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -114,7 +114,7 @@ class _SignInWidgetState extends State<SignInWidget> {
               TextButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const SignUpWidget();
+                    return const SignUpView();
                   }));
                 },
                 child: Row(

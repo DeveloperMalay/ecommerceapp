@@ -1,6 +1,6 @@
-import 'package:ecommerceapp/bloc/getproduct_event.dart';
-import 'package:ecommerceapp/bloc/getproduct_state.dart';
 import 'package:ecommerceapp/repository/new_repository.dart';
+import 'package:ecommerceapp/services/product_bloc/getproduct_event.dart';
+import 'package:ecommerceapp/services/product_bloc/getproduct_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GetProductsBloc extends Bloc<GetProductEvent, GetProductState> {

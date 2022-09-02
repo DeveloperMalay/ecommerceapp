@@ -1,8 +1,8 @@
 import 'package:ecommerceapp/UI/views/product_details_view.dart';
-import 'package:ecommerceapp/bloc/getproduct_bloc.dart';
-import 'package:ecommerceapp/bloc/getproduct_event.dart';
-import 'package:ecommerceapp/bloc/getproduct_state.dart';
 import 'package:ecommerceapp/models/new_model.dart';
+import 'package:ecommerceapp/services/product_bloc/getproduct_bloc.dart';
+import 'package:ecommerceapp/services/product_bloc/getproduct_event.dart';
+import 'package:ecommerceapp/services/product_bloc/getproduct_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
