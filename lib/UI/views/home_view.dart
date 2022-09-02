@@ -1,8 +1,10 @@
 import 'package:ecommerceapp/UI/theme/theme.dart';
+import 'package:ecommerceapp/UI/views/post_product_view.dart';
 import 'package:ecommerceapp/UI/widgets/get_all_product.dart';
 import 'package:ecommerceapp/UI/widgets/product_category.dart';
 import 'package:ecommerceapp/UI/widgets/search.dart';
 import 'package:ecommerceapp/UI/widgets/slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -13,13 +15,12 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ecommerce'),
-       
         actions: [
-          const Icon(
-            Icons.favorite_rounded,
-            color: Colors.red,
-          ),
-          const SizedBox(width: 20),
+          // const Icon(
+          //   Icons.favorite_rounded,
+          //   color: Colors.red,
+          // ),
+          //const SizedBox(width: 20),
           const Icon(Icons.shopping_cart_rounded),
           const SizedBox(width: 20),
           CircleAvatar(
@@ -27,6 +28,12 @@ class HomeView extends StatelessWidget {
             child: const Icon(Icons.person),
           ),
           const SizedBox(width: 10),
+          IconButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+            icon: const Icon(Icons.logout_rounded),
+          ),
         ],
       ),
       body: Column(
@@ -67,7 +74,8 @@ class HomeView extends StatelessWidget {
               ),
             ),
           ),
-          const Expanded(
+          const SizedBox(
+            height: 321,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: GetAllProducts(),
@@ -89,7 +97,11 @@ class HomeView extends StatelessWidget {
             color: Colors.white,
             size: 35,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const PostProductView();
+            }));
+          },
         ),
       ),
     );

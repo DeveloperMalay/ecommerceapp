@@ -1,22 +1,27 @@
 import 'package:ecommerceapp/UI/theme/theme.dart';
-import 'package:ecommerceapp/UI/views/home_view.dart';
+import 'package:ecommerceapp/UI/views/authentication_view.dart';
+import 'package:ecommerceapp/UI/widgets/error_snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(const MyApp());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  MyApp({Key? key}) : super(key: key);
+  ErrorSnackBar messengerkey = ErrorSnackBar();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: messengerkey.messengerKey,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme,
-      home: const HomeView(),
+      home: const AuthenticationView(),
     );
   }
 }
