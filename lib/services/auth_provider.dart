@@ -1,7 +1,7 @@
 import 'package:ecommerceapp/services/auth_user.dart';
 
 abstract class AuthProvider {
-  // Future<void> initalize();
+  Future<void> initalize();
   AuthUser? get currentuser;
   Future<AuthUser> logIn({
     required String email,
