@@ -1,5 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ecommerceapp/services/authentication_bloc/auth_bloc.dart';
+import 'package:ecommerceapp/services/authentication_bloc/auth_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({Key? key}) : super(key: key);
@@ -25,13 +27,25 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                 minimumSize: const Size.fromHeight(50),
               ),
               onPressed: () {
-                FirebaseAuth.instance.currentUser!.sendEmailVerification();
+                context.read<AuthBloc>().add(
+                      const AuthEventSendEmailVerification(),
+                    );
+
+                //FirebaseAuth.instance.currentUser!.sendEmailVerification();
               },
               icon: const Icon(Icons.email),
               label: const Text(
                 'Send Email Verification',
                 style: TextStyle(fontSize: 24),
               ),
+            ),
+            TextButton(
+              onPressed: () {
+                context.read<AuthBloc>().add(
+                      const AuthEventLogOut(),
+                    );
+              },
+              child: const Text('Restart'),
             ),
           ],
         ),

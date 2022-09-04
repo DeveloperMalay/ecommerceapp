@@ -1,8 +1,12 @@
-import 'package:ecommerceapp/UI/views/authview/sign_up_view.dart';
 import 'package:ecommerceapp/UI/widgets/error_snackbar.dart';
+import 'package:ecommerceapp/dialogs/error_diolog.dart';
+import 'package:ecommerceapp/services/auth_exception.dart';
+import 'package:ecommerceapp/services/authentication_bloc/auth_bloc.dart';
+import 'package:ecommerceapp/services/authentication_bloc/auth_event.dart';
+import 'package:ecommerceapp/services/authentication_bloc/auth_state.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({Key? key}) : super(key: key);
@@ -29,6 +33,15 @@ class _SignInViewState extends State<SignInView> {
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
 
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    context.read<AuthBloc>().add(
+          AuthEventLogIn(
+            email,
+            password,
+          ),
+        );
+
     // showDialog(
     //   context: context,
     //   barrierDismissible: false,
@@ -36,112 +49,131 @@ class _SignInViewState extends State<SignInView> {
     //     child: CircularProgressIndicator(),
     //   ),
     // );
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
-    } on FirebaseAuthException catch (e) {
-      snackBar.showSnackBar(e.message);
-    }
+    // try {
+    //   await FirebaseAuth.instance.signInWithEmailAndPassword(
+    //       email: emailController.text.trim(),
+    //       password: passwordController.text.trim());
+    // } on FirebaseAuthException catch (e) {
+    //   snackBar.showSnackBar(e.message);
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Form(
-        key: formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              const Text(
-                'Hey There,\nWelcome Back',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) async {
+        if (state is AuthStateLoggedOut) {
+          if (state.exception is UserNotFoundAuthException) {
+            await showErrorDialog(
+              context,
+              'Cannot find a user wh=ith the entered credential',
+            );
+          } else if (state.exception is WrongPasswordAuthException) {
+            await showErrorDialog(context, 'Wrong credential');
+          } else if (state.exception is GenericAuthException) {
+            await showErrorDialog(context, 'Authentication Error');
+          }
+        }
+      },
+      child: Scaffold(
+        body: Form(
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 50,
                 ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              TextFormField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
+                const Text(
+                  'Hey There,\nWelcome Back',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (email) =>
-                    email != null && !EmailValidator.validate(email)
-                        ? 'Enter a valid email'
-                        : null,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
+                const SizedBox(
+                  height: 60,
                 ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => value != null && value.length < 6
-                    ? 'password must be more than 6 characters'
-                    : null,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
+                TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (email) =>
+                      email != null && !EmailValidator.validate(email)
+                          ? 'Enter a valid email'
+                          : null,
                 ),
-                onPressed: () {
-                  signIn();
-                },
-                icon: const Icon(Icons.lock_open),
-                label: const Text(
-                  'Sign In',
-                  style: TextStyle(fontSize: 24),
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const SignUpView();
-                  }));
-                },
-                child: Row(
-                  children: const [
-                    Text(
-                      "Don't have a account?",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) => value != null && value.length < 6
+                      ? 'password must be more than 6 characters'
+                      : null,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'forgot password ?',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 10,
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50),
+                  ),
+                  onPressed: () {
+                    signIn();
+                  },
+                  icon: const Icon(Icons.lock_open),
+                  label: const Text(
+                    'Sign In',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.read<AuthBloc>().add(
+                          const AuthEventShouldRegister(),
+                        );
+
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //   return const SignUpView();
+                    // }));
+                  },
+                  child: const Text(
+                    "Don't have a account? Sign Up",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -10,6 +10,7 @@ Future main() async {
   runApp(MyApp());
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   ErrorSnackBar messengerkey = ErrorSnackBar();
